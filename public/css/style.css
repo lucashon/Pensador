@@ -42,7 +42,74 @@
  color: var(--blue);
 }
 
-/* Contaimner */
+/* Message */
+.message{
+  padding: 1rem;
+  color: var(--blue);
+  background-color: var(--white);
+  border: 1px solid var(--blue);
+  border-radius: 5px;
+  text-align:center;
+  margin: 0 auto 2rem;
+  width: 60%;
+  min-width: 60%;
+  transition: 0.7s;
+}
+.message:hover{
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+/* Registrar */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  align-items: center;
+
+}
+.auth-container h1{
+  display: flex;
+  font-size: 2rem;
+}
+.auth-container section{
+  width: 468px;
+  height: 44px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  padding-left: 4px ;
+  border-left: 5px solid var(--blue) ;
+
+}
+.auth-container input{  border: 2px solid var(--white); width: 468px; height: 44px; padding: 10px;  outline:none;}
+.auth-container input:focus{
+  border-color: var(--blue);
+
+}
+.auth-container div{
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  gap: .5rem;
+}
+.auth-container label{
+  font-weight: bold;
+}
+#cadastro{
+  border: 2px solid var(--blue);
+  color: var(--blue);
+  width: 154px;
+  font-size: 20px;
+  margin-left: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.auth-container a{
+  color: var(--blue);
+}
+/* Container */
 .container{
   min-height: 70vh;
   padding: 2rem;
@@ -59,3 +126,4 @@ footer span{
   font-weight: bold;
   color: var(--blue);
 }
+
