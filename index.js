@@ -1,64 +1,70 @@
-const express = require("express");
-const exphbs = require("express-handlebars");
-const session = require("express-session");
-const FileStore = require("session-file-store")(session);
-const flash = require("express-flash");
+const express = require('express')
+const exphbs = require('express-handlebars')
+const session = require('express-session')//Criar sessão do usuário
+const Filestore = require('session-file-store')(session)
+const flash = require('express-flash')
 
-const app = express();
-const conn = require("./db/conn");
+const app = express()
 
-// Import Models
-const User = require("./models/User");
-const Tought = require("./models/Tought");
-// Import routes
+const conn = require('./db/conn')
 
-// Import Controller
+//Models
+const User = require('./models/User')
+const Tought = require('./models/Tought')
 
-// Configurar engine
-app.engine("handlebars", exphbs.engine());
-app.set("view engine", "handlebars");
-// configurar JSON
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-// Middleware para as sessões
-app.use(
-  session({
-    name: "session",
-    secret: "nosso_secret", //Quanto maior  a crypto melhor
-    resave: false,
-    saveUninitialized: false,
-    store: new FileStore({
-      logFn: function () {},
-      path: require("path").join(require("os").tmpdir(), "session"),
-    }),
-    cookie: {
-      secure: false,
-      maxAge: 360000,
-      expires: new Date(Date.now() + 360000),
-      httpOnly: true,
-    },
-  })
-);
-// Importar as flash
-app.use(flash());
-// Importar os arquivos estáticos
-app.use(express.static("public"));
-// Armazenar as sessões nas rotas
-app.use((request, response) => {
-  if (request.session.userId) {
-    response.locals.session = request.session;
+// importar rotas
+const  toughtRouter = require('./routes/toughtsRoutes')
+
+// importar controller
+const ToughtController = require('./controllers/ToughtController')
+
+//Import Engine
+app.engine('handlebars', exphbs.engine())
+app.set('view engine', 'handlebars')
+
+//Import JSON
+app.use(express.urlencoded({extended:true}))
+app.use(express.json())
+
+//Import middleware para controle de sessões
+app.use(session({
+  name:"session",
+  secret:"nosso_segredo",
+  resave: false,
+  saveUninitialized: false,
+  store: new Filestore({
+    logFn: function() {},
+    path: require('path').join(require('os').tmpdir(), 'sessions')
+  }),
+  cookie:{
+    secure: false,
+    maxAge: 360000,
+    expires: new Date(Date.now() + 360000),
+    httpOnly: true
   }
-  next();
-});
-// rotas
+}))
 
-// Conexão de criação das telas do banco
+//Import as flash Messages
+app.use(flash())
+
+//Import static files
+app.use(express.static('public'))
+
+//Middleware para armazenar sessões na resposta
+app.use((request, response, next)=>{
+  if(request.session.userId){
+    response.locals.session = request.session
+  }
+  next()
+})
+
+// rotas
+app.use('/toughts', toughtRouter)
+app.get('/', ToughtController.showToughts)
+
 conn
   .sync()
-  .then(() => {
-    app.listen(3333);
-    console.log("rodando");
+  .then(()=>{
+    app.listen(3333)
   })
-  .catch((err) => {
-    console.log(err);
-  });
+  .catch((err)=>console.log(err))
