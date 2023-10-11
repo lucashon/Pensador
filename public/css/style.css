@@ -105,6 +105,13 @@
   margin-left: 5px;
   margin-top: 10px;
   margin-bottom: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+
+}
+#cadastro:hover{
+  background-color: var(--blue);
+  color: var(--white);
 }
 .auth-container a{
   color: var(--blue);
