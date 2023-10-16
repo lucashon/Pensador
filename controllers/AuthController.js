@@ -20,7 +20,7 @@ module.exports = class AuthController {
     const passwordMatch = bcrypt.compareSync(password, user.password)
     if(!passwordMatch){
       request.flash('message', 'Senha inválida')
-      response.redirect('/login')
+      response.render('auth/login')
     }
 
     request.session.userId = user.id
