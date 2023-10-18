@@ -21,7 +21,13 @@ module.exports = class ToughtController{
       const toughts = user.Toughts.map((result)=>result.dataValues)
       console.log(toughts)
 
-    return response.render('toughts/dashboard', {toughts})
+      let emplytought = false
+
+      // if(emplytought.length === 0){
+      //   emplytought = true
+      // }
+
+    return response.render('toughts/dashboard', {toughts, emplytought})
   }
   static async createTought(request,response){
     return response.render('toughts/create')
@@ -49,6 +55,25 @@ module.exports = class ToughtController{
     const id = request.body.id
 
     await Tought.destroy({where:{id:id}})
+    return response.redirect('/toughts/dashboard')
+  }
+  static async UpToughts(request,response){
+    const id = request.params.id
+
+    const toughtNew = await Tought.findOne({raw:true, where:{id:id}})
+    console.log(toughtNew)
+    return response.render('toughts/atualizar', {toughtNew})
+  }
+
+  static async UpdateToughts(request,response){
+
+    const id = request.body.id
+    const novo = {
+      title:  request.body.title
+    }
+
+     await Tought.update(novo, { where: { id: id } })
+
     return response.redirect('/toughts/dashboard')
   }
 }

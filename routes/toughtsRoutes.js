@@ -12,5 +12,7 @@ router.get('/add', checkAuth, ToughtController.createTought)
 router.post('/add', checkAuth, ToughtController.createToughtSave)
 router.get("/", ToughtController.showToughts);
 router.post("/delete", ToughtController.deleteToughts);
+router.get("/atualizar/:id", ToughtController.UpToughts);
+router.post("/atualizar", ToughtController.UpdateToughts);
 
 module.exports = router;

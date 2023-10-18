@@ -1,0 +1,12 @@
+<section class="tought-form-container">
+  <a href="/toughts/dashboard">Voltar</a>
+  <section><h1>Editar Pensamento</h1></section>
+  <form action="/toughts/atualizar" method="post">
+  <div class="form-control2">
+    <input type="hidden" name="id" value="{{toughtNew.id}}">
+    <label for="title">Pensamento</label>
+    <input type="text" name="title" value="{{toughtNew.title}}" >
+  </div>
+  <input id="cadastro" type="submit" value="Atualizar">
+  </form>
+</section>

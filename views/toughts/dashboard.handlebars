@@ -9,7 +9,7 @@
     <li>
       <span>{{this.title}}</span>
       <span>
-        <a href="/">Editar</a>
+        <a href="/toughts/atualizar/{{this.id}}">Editar</a>
         <form action="/toughts/delete" method="post">
         <input type="hidden" name="id" value="{{this.id}}">
         <input type="submit" value="Excluir">
@@ -18,4 +18,9 @@
     </li>
     {{/each}}
   </ul>
+
+{{#if emplytought}}
+<p>Ainda não existe pensamento, comece a Criar <a href="/toughts/add"></a> </p>
+{{/if}}
+
 </section>
