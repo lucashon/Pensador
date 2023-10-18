@@ -21,13 +21,13 @@ module.exports = class ToughtController{
       const toughts = user.Toughts.map((result)=>result.dataValues)
       console.log(toughts)
 
-      let emplytought = false
+      let emptyThoughts = false
 
-      // if(emplytought.length === 0){
-      //   emplytought = true
-      // }
+    if(toughts.length === 0){
+      emptyThoughts = true
+    }
 
-    return response.render('toughts/dashboard', {toughts, emplytought})
+    return response.render('toughts/dashboard', {toughts,emptyThoughts })
   }
   static async createTought(request,response){
     return response.render('toughts/create')
