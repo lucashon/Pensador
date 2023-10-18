@@ -11,5 +11,6 @@ router.get('/dashboard', ToughtController.dashboard)
 router.get('/add', checkAuth, ToughtController.createTought)
 router.post('/add', checkAuth, ToughtController.createToughtSave)
 router.get("/", ToughtController.showToughts);
+router.post("/delete", ToughtController.deleteToughts);
 
 module.exports = router;

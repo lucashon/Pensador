@@ -6,7 +6,22 @@ module.exports = class ToughtController{
     return response.render('toughts/home')
   }
   static async dashboard(request,response){
-    return response.render('toughts/dashboard')
+    const userid = request.session.userId
+
+    // Select com join SEQUELIZE
+    const user = await User.findOne({
+      where:{id:userid},
+       include: Tought,
+       plain:true
+      })
+      if(!user){
+        response.redirect('/login');
+      }
+      // console.log(user.Toughts)
+      const toughts = user.Toughts.map((result)=>result.dataValues)
+      console.log(toughts)
+
+    return response.render('toughts/dashboard', {toughts})
   }
   static async createTought(request,response){
     return response.render('toughts/create')
@@ -28,5 +43,12 @@ module.exports = class ToughtController{
       console.log(error)
     }
 
+  }
+
+  static async deleteToughts(request,response){
+    const id = request.body.id
+
+    await Tought.destroy({where:{id:id}})
+    return response.redirect('/toughts/dashboard')
   }
 }
