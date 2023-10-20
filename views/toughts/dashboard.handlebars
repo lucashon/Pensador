@@ -6,7 +6,7 @@
     <h2>Dashboard</h2>
     <a href="/toughts/add" class="btn">Criar Pensamentos</a>
   </section>
-  <h3>Seus Pensamentos</h3>
+  <h3>Seus Pensamentos:</h3>
   <ul>
     {{#if emptyThoughts}}
       <p class="emptyThoughts">Ainda não existe pensamentos, comece a criar <a href="/toughts/add">Por aqui</a></p>
@@ -16,7 +16,9 @@
         <p>{{this.title}}</p>
 
         <section class="actions">
-           <a href="/toughts/atualizar/{{this.id}}">Editar</a>
+          <a id="aBtn" href="/toughts/atualizar/{{this.id}}">
+           Editar
+          </a>
 
           <form action="/toughts/delete" method="post">
           <input type="hidden" name="id" value="{{this.id}}">
