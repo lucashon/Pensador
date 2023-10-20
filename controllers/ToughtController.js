@@ -1,14 +1,33 @@
 const Tought = require('../models/Tought')
 const User = require('../models/User')
+const {Op} = require('sequelize')
+const { query } = require('express')
 
 module.exports = class ToughtController{
+
   static async showToughts(request, response){
-    return response.render('toughts/home')
+
+
+    const query = `${request.query.search}`
+
+   const search = await Tought.findAll({where: {title: {[Op.like]: query  }}})
+    console.log(search)
+
+
+    const toughtsData = await Tought.findAll({
+      include: User,
+    })
+
+    const toughts = toughtsData.map((result)=> result.get({plain:true}))
+    // console.log(toughts)
+    return response.render('toughts/home', {toughts, search})
   }
+
+
+  // Select com join SEQUELIZE
   static async dashboard(request,response){
     const userid = request.session.userId
 
-    // Select com join SEQUELIZE
     const user = await User.findOne({
       where:{id:userid},
        include: Tought,

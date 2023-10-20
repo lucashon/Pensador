@@ -314,3 +314,72 @@ flex-direction: column;
     background-color: var(--blue);
     color: var(--white);
   }
+
+
+  /* HOME Pensamentos */
+.home-header{
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+.home-header h1{
+  margin-bottom: 1rem;
+}
+.home-header a{
+  color: var(--white);
+}
+.home-header p, .home-header form{
+  margin-bottom: 1rem;
+}
+.home-header input{
+  border: none;
+  border-bottom: 1px solid var(--white);
+  padding: .5rem;
+  margin-right: 1rem;
+}
+.home-header input[type = 'text']{
+  width: 75%; font-size: 18px;
+}
+.home-header input::placeholder{
+  color: var(--white);
+}
+.order-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 75%;
+  margin: 0 auto 1rem;
+}
+.order-container form{
+  margin: 0;
+}
+.order-container button{
+  margin-bottom: 0;
+  border: none; cursor: pointer;
+}
+.order-container button:hover,
+.order-container i:hover,
+.order-container a:hover{
+  color: var(--blue);
+}
+.order-container button,
+.order-container i,
+.order-container a{
+  margin: 0 7px;
+}
+.toughts-container figure{
+  border-bottom: 1px solid #333;
+  padding: 0.5rem;
+  max-width: 75%;
+  margin: 0 auto 1rem;
+}
+.toughts-container blockquote{
+  font-size: italic;
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+}
+.toughts-container span{
+  color: var(--blue);
+}
